@@ -1,0 +1,38 @@
+# 质量回路：push / PR 时自动跑单测 + mock 评测（零 API 成本）。
+# 防"评测全过但行为坏了"的回归（项目史上真实发生过：缩进回归 bug）。
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # 项目零第三方依赖（标准库实现 RAG/循环/工具），
+      # 只有 pytest 是测试运行器
+      - name: Install test runner
+        run: pip install pytest
+
+      # config.json 被 .gitignore 排除（含 API key），CI 用脱敏模板顶上
+      - name: Prepare config
+        run: cp config.example.json config.json
+
+      # 索引文件不入库（派生产物可重建），CI 显式重建 hash 索引
+      - name: Build RAG index
+        run: python -m rag.build
+
+      - name: Unit tests (19 cases)
+        run: pytest tests/ -v
+
+      - name: Mock eval (58 cases, zero API cost)
+        run: python eval/eval_script.py

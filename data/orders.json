@@ -1,0 +1,54 @@
+{
+  "orders": [
+    {
+      "order_id": "JD20260815001",
+      "product": "无线路由器",
+      "amount": 199.0,
+      "status": "已发货",
+      "create_time": "2026-08-15 10:23",
+      "logistics": "已揽收，预计 2026-08-18 送达",
+      "coupon": 20.0,
+      "freight": 0.0
+    },
+    {
+      "order_id": "JD20260811002",
+      "product": "智能音箱",
+      "amount": 329.0,
+      "status": "已签收",
+      "create_time": "2026-08-11 20:05",
+      "logistics": "2026-08-13 已签收",
+      "coupon": 30.0,
+      "freight": 0.0
+    },
+    {
+      "order_id": "JD20260809003",
+      "product": "手机（申请退款中）",
+      "amount": 2899.0,
+      "status": "退款审核中",
+      "create_time": "2026-08-09 09:41",
+      "logistics": "已拦截，等待退回",
+      "coupon": 100.0,
+      "freight": 0.0
+    },
+    {
+      "order_id": "JD20260730004",
+      "product": "空气炸锅",
+      "amount": 459.0,
+      "status": "已发货",
+      "create_time": "2026-07-30 14:12",
+      "logistics": "运输中，预计 2026-08-02 送达",
+      "coupon": 50.0,
+      "freight": 0.0
+    },
+    {
+      "order_id": "JD20260725005",
+      "product": "洗衣液（套装）",
+      "amount": 89.9,
+      "status": "已签收",
+      "create_time": "2026-07-25 16:37",
+      "logistics": "2026-07-27 已签收",
+      "coupon": 10.0,
+      "freight": 0.0
+    }
+  ]
+}

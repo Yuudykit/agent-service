@@ -1,0 +1,142 @@
+[
+  {
+    "id": "e_01",
+    "turns": ["退款多久能到账？"],
+    "expect": {"tool": "search_kb", "keywords": ["原路", "工作日"], "note": "退款到账周期"}
+  },
+  {
+    "id": "e_02",
+    "turns": ["下单后一般什么时候发货？"],
+    "expect": {"tool": "search_kb", "keywords": ["48", "小时", "发出"], "note": "发货时效"}
+  },
+  {
+    "id": "e_03",
+    "turns": ["可以开发票吗？什么时候能开？"],
+    "expect": {"tool": "search_kb", "keywords": ["电子发票", "24"], "note": "发票开具"}
+  },
+  {
+    "id": "e_04",
+    "turns": ["商品显示缺货了，要等多久？"],
+    "expect": {"tool": "search_kb", "keywords": ["到货", "补货"], "note": "缺货补货"}
+  },
+  {
+    "id": "e_05",
+    "turns": ["我昨天买的今天降价了，能补差价吗？"],
+    "expect": {"tool": "search_kb", "keywords": ["差价", "新订单"], "note": "保价差价"}
+  },
+  {
+    "id": "e_06",
+    "turns": ["退货需要自己出运费吗？"],
+    "expect": {"tool": "search_kb", "keywords": ["质量", "运费"], "note": "退货运费"}
+  },
+  {
+    "id": "e_07",
+    "turns": ["商品有质量问题怎么换货？"],
+    "expect": {"tool": "search_kb", "keywords": ["换货", "返修退换货", "上门"], "note": "换货流程"}
+  },
+  {
+    "id": "e_08",
+    "turns": ["订单的联系电话必须填手机号吗？"],
+    "expect": {"tool": "search_kb", "keywords": ["手机号", "联系"], "note": "手机号必填"}
+  },
+  {
+    "id": "e_09",
+    "turns": ["这个商品的保修期是多久？"],
+    "expect": {"tool": "search_kb", "keywords": ["质保", "一年"], "note": "保修政策"}
+  },
+  {
+    "id": "e_10",
+    "turns": ["优惠券可以叠加使用吗？"],
+    "expect": {"tool": "search_kb", "keywords": ["叠加", "优惠券"], "note": "优惠券规则"}
+  },
+  {
+    "id": "e_11",
+    "turns": ["怎么转人工客服？"],
+    "expect": {"tool": "transfer_human", "keywords": ["人工", "950618"], "note": "人工客服"}
+  },
+  {
+    "id": "e_12",
+    "turns": ["家电坏了怎么申请售后？"],
+    "expect": {"tool": "search_kb", "keywords": ["厂家", "检测", "返修退换货"], "note": "家电售后"}
+  },
+  {
+    "id": "e_13",
+    "turns": ["发票金额是怎么计算的？"],
+    "expect": {"tool": "search_kb", "keywords": ["实际支付", "优惠"], "note": "发票金额"}
+  },
+  {
+    "id": "e_14",
+    "turns": ["我申请退款了，能取消吗？"],
+    "expect": {"tool": "search_kb", "keywords": ["无法直接取消", "拦截"], "note": "退款取消"}
+  },
+  {
+    "id": "e_15",
+    "turns": ["今天上海天气怎么样？"],
+    "expect": {"tool": "fallback", "keywords": [], "note": "非客服范围，必须兜底不编造"}
+  },
+  {
+    "id": "e_16",
+    "turns": ["帮我写一首关于夏天的诗"],
+    "expect": {"tool": "fallback", "keywords": [], "note": "与客服无关，走兜底"}
+  },
+  {
+    "id": "e_17",
+    "turns": ["你们公司老板是谁？"],
+    "expect": {"tool": "fallback", "keywords": [], "note": "未知问题防幻觉"}
+  },
+  {
+    "id": "e_18",
+    "turns": ["绝区零游戏里安比怎么配队？"],
+    "expect": {"tool": "fallback", "keywords": [], "note": "与电商客服无关，防幻觉"}
+  },
+  {
+    "id": "e_19",
+    "turns": ["快递一直没物流更新是怎么回事？"],
+    "expect": {"tool": "search_kb", "keywords": ["厂家", "更新"], "note": "物流不更新"}
+  },
+  {
+    "id": "e_20",
+    "turns": ["订单还没付款会被取消吗？"],
+    "expect": {"tool": "search_kb", "keywords": ["取消", "付款"], "note": "未付款取消"}
+  },
+  {
+    "id": "e_21",
+    "turns": ["我买了个路由器想开发票", "刚才那个订单税号填错了，怎么改？"],
+    "expect": {"tool": "search_kb", "keywords": ["税号", "发票"], "note": "多轮记忆：第二轮应承接发票话题"}
+  },
+  {
+    "id": "e_22",
+    "turns": ["你们什么时候发货？", "那一般多久能送到？"],
+    "expect": {"tool": "search_kb", "keywords": ["配送", "工作日"], "note": "多轮记忆：物流话题延续"}
+  },
+  {
+    "id": "e_23",
+    "turns": ["在吗？"],
+    "expect": {"tool": "none", "keywords": ["您好", "帮助", "客服"], "note": "寒暄不调工具"}
+  },
+  {
+    "id": "e_24",
+    "turns": ["退退退退退！"],
+    "expect": {"tool": "search_kb", "keywords": ["退货", "申请"], "note": "简短意图也要正确路由"}
+  },
+  {
+    "id": "e_25",
+    "turns": ["多件商品的订单，有货的能先发吗？"],
+    "expect": {"tool": "search_kb", "keywords": ["先发", "拆分"], "note": "拆分发货"}
+  },
+  {
+    "id": "e_26",
+    "turns": ["我的订单 JD20260815001 现在到哪了？"],
+    "expect": {"tool": "query_info", "keywords": ["已发货", "揽收"], "note": "订单结构化查询（Day7 新增工具）"}
+  },
+  {
+    "id": "e_27",
+    "turns": ["JD20260811002 这单能退多少钱？"],
+    "expect": {"tool": "calculate_refund", "keywords": ["应退", "¥"], "note": "退款计算（Day7 新增工具）"}
+  },
+  {
+    "id": "e_28",
+    "turns": ["查一下订单 JD20260809003 退款退到哪一步了"],
+    "expect": {"tool": "query_info", "keywords": ["退款审核中", "状态"], "note": "订单状态精确查询"}
+  }
+]

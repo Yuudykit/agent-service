@@ -1,0 +1,1126 @@
+[
+  {
+    "id": "mt_000",
+    "source_session": "00029c51f92e8f34250d6af329c9a8df",
+    "source_dialogue": "d_0001",
+    "history": [
+      {
+        "role": "user",
+        "text": "恩"
+      },
+      {
+        "role": "agent",
+        "text": "查询以操作了有货先发"
+      },
+      {
+        "role": "agent",
+        "text": "您的订单现在是两个订单"
+      },
+      {
+        "role": "agent",
+        "text": "建议您关注一下订单的物流信息哈"
+      },
+      {
+        "role": "user",
+        "text": "狗粮啥时候能有货?"
+      },
+      {
+        "role": "agent",
+        "text": "预计一周左右"
+      }
+    ],
+    "query": "好吧，希望快点发货",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "发货",
+        "发出",
+        "到货",
+        "物流",
+        "快递"
+      ],
+      "note": "真实多轮：物流发货",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_001",
+    "source_session": "020b03ecda14bc9ba536b7d8ff460139",
+    "source_dialogue": "d_0002",
+    "history": [
+      {
+        "role": "user",
+        "text": "我怎么申请售后"
+      },
+      {
+        "role": "user",
+        "text": "买重了"
+      },
+      {
+        "role": "user",
+        "text": "在吗"
+      },
+      {
+        "role": "agent",
+        "text": "申请路径:[站点x]可通过“我的京东”-“客户服务”-“返修退换货”内申请(也可直接点击此链接:http://myjd.jd.com/repair/orderlist.action;【APP端】可通过“我的”-“客户服务”-“退换/售后“中申请~"
+      }
+    ],
+    "query": "退换无忧也要自己拿邮费吗",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "退款",
+        "退货"
+      ],
+      "note": "真实多轮：退货退款",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_002",
+    "source_session": "06469544db28f69286a8bbf0f169d886",
+    "source_dialogue": "d_0004",
+    "history": [
+      {
+        "role": "agent",
+        "text": "有什么问题我可以帮您处理或解决呢?"
+      },
+      {
+        "role": "user",
+        "text": "好，这件衣服是上个月月底收到的，前天才穿，结果发现右胳肢窝漏缝，未缝合怎么办啊"
+      },
+      {
+        "role": "agent",
+        "text": "可以申请售后换货的哦"
+      },
+      {
+        "role": "user",
+        "text": "售后不受理"
+      },
+      {
+        "role": "user",
+        "text": "我想要申请售后服务"
+      },
+      {
+        "role": "agent",
+        "text": "小妹建议您可以申请售后哦，，在您的 手机端 右下角我的 -返修/退换-申请哈!"
+      }
+    ],
+    "query": "我想要申请售后服务",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "售后"
+      ],
+      "note": "真实多轮：售后政策",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_003",
+    "source_session": "0cea8e57d774e96ce6b5ccc4ff9bc536",
+    "source_dialogue": "d_0007",
+    "history": [
+      {
+        "role": "user",
+        "text": "你好"
+      },
+      {
+        "role": "agent",
+        "text": "请问您是咨询之前的问题还是有其他的问题需要处理呢?"
+      },
+      {
+        "role": "agent",
+        "text": "您方便简单描述下您的问题吗?"
+      }
+    ],
+    "query": "我有个东西没退款成功啊",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "退款",
+        "退货"
+      ],
+      "note": "真实多轮：退货退款",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_004",
+    "source_session": "0ec7adade6dcd6e84fc6c3ae23647fde",
+    "source_dialogue": "d_0008",
+    "history": [
+      {
+        "role": "user",
+        "text": "好的谢谢"
+      },
+      {
+        "role": "agent",
+        "text": "您客气了，为您服务是小妹的荣幸呢#E-s[数字x]#E-s[数字x]#E-s[数字x]"
+      },
+      {
+        "role": "agent",
+        "text": "请问还有其他还可以帮到您的吗?"
+      },
+      {
+        "role": "user",
+        "text": "你好联系上了，待会我去拿"
+      },
+      {
+        "role": "user",
+        "text": "我还有一个订单 号码也是错的"
+      },
+      {
+        "role": "user",
+        "text": "麻烦帮我修改一下"
+      }
+    ],
+    "query": "咨询订单号:[ORDERID_10004097] 订单金额:[金额x] 下单时间:[日期x]",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "订单"
+      ],
+      "note": "真实多轮：订单修改",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_005",
+    "source_session": "132b6b9fad1930e5a2c496ef4712e5ce",
+    "source_dialogue": "d_0010",
+    "history": [
+      {
+        "role": "agent",
+        "text": "有什么问题我可以帮您处理或解决呢?"
+      },
+      {
+        "role": "user",
+        "text": "我那个返修今天能到吗"
+      },
+      {
+        "role": "user",
+        "text": "有没有预计到货时间"
+      },
+      {
+        "role": "agent",
+        "text": "退换货的处理是在确认问题之后的[数字x]天左右，维修的周期一般是三十天内的(特殊商品除外，如:手表)，还请您关注一下您的服务单进程哦"
+      },
+      {
+        "role": "user",
+        "text": "VF[数字x]"
+      },
+      {
+        "role": "user",
+        "text": "不这个快递号"
+      }
+    ],
+    "query": "你看看预计到货时间",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "发货",
+        "发出",
+        "到货",
+        "物流",
+        "快递"
+      ],
+      "note": "真实多轮：物流发货",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_006",
+    "source_session": "1515525ab318e4fe193981abbc99a78d",
+    "source_dialogue": "d_0011",
+    "history": [
+      {
+        "role": "agent",
+        "text": "[数字x] 儿童专注力游戏绘本:动物大发现"
+      },
+      {
+        "role": "agent",
+        "text": "这个"
+      },
+      {
+        "role": "user",
+        "text": "好"
+      },
+      {
+        "role": "user",
+        "text": "这个不急"
+      },
+      {
+        "role": "agent",
+        "text": "已经帮您拆分了，有货的商品会很快给您发出来呢，您注意查收哦。么么哒"
+      },
+      {
+        "role": "user",
+        "text": "好"
+      }
+    ],
+    "query": "是京东物流吗",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "发货",
+        "发出",
+        "到货",
+        "物流",
+        "快递"
+      ],
+      "note": "真实多轮：物流发货",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_007",
+    "source_session": "1b7125898ce253ae93743eacdeb4a3fd",
+    "source_dialogue": "d_0014",
+    "history": [
+      {
+        "role": "user",
+        "text": "你好"
+      },
+      {
+        "role": "agent",
+        "text": "您好"
+      },
+      {
+        "role": "user",
+        "text": "前两天买的拖地机[数字x]元，昨天收到了"
+      },
+      {
+        "role": "user",
+        "text": "今天你们标价[数字x]"
+      },
+      {
+        "role": "agent",
+        "text": "还请您稍等，马上为您查询~"
+      },
+      {
+        "role": "user",
+        "text": "你给我退回来[数字x]元"
+      }
+    ],
+    "query": "不然我退货了",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "退款",
+        "退货"
+      ],
+      "note": "真实多轮：退货退款",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_008",
+    "source_session": "1d68015d5099703f36657549bf61cbe0",
+    "source_dialogue": "d_0015",
+    "history": [
+      {
+        "role": "user",
+        "text": "在吗"
+      },
+      {
+        "role": "user",
+        "text": "这个什么时候可以发货啊"
+      },
+      {
+        "role": "agent",
+        "text": "您好，您的问题这边正在确认中，因咨询人数较多，请您稍等几分钟谢谢"
+      }
+    ],
+    "query": "不好意思。我申请退货了",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "退款",
+        "退货"
+      ],
+      "note": "真实多轮：退货退款",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_009",
+    "source_session": "1efb2dfcbc165479a9c90d5edf0f9f8e",
+    "source_dialogue": "d_0016",
+    "history": [
+      {
+        "role": "agent",
+        "text": "[数字x]"
+      },
+      {
+        "role": "user",
+        "text": "为啥状态没更新?"
+      },
+      {
+        "role": "user",
+        "text": "意思是给我发过来了?"
+      },
+      {
+        "role": "agent",
+        "text": "物流还没有显示"
+      },
+      {
+        "role": "agent",
+        "text": "建议您耐心等待下"
+      },
+      {
+        "role": "agent",
+        "text": "因年前 物流较慢的哈"
+      }
+    ],
+    "query": "商家发货了么  快递单号是啥",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "发货",
+        "发出",
+        "到货",
+        "物流",
+        "快递"
+      ],
+      "note": "真实多轮：物流发货",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_010",
+    "source_session": "293e11da3af9d233eee91f7722f10963",
+    "source_dialogue": "d_0021",
+    "history": [
+      {
+        "role": "agent",
+        "text": "有什么问题我可以帮您处理或解决呢?"
+      },
+      {
+        "role": "agent",
+        "text": "亲爱的，妹子在的哦，您看这边有什么可以帮到您的吗#E-s[数字x]"
+      },
+      {
+        "role": "user",
+        "text": "[ORDERID_10002252]"
+      },
+      {
+        "role": "user",
+        "text": "麻烦查询一下这个订单"
+      }
+    ],
+    "query": "几时可以退款",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "退款",
+        "退货"
+      ],
+      "note": "真实多轮：退货退款",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_011",
+    "source_session": "2b8e685975f04e8bd8eaa7c9bbb8d361",
+    "source_dialogue": "d_0022",
+    "history": [
+      {
+        "role": "user",
+        "text": "我不懂啊"
+      },
+      {
+        "role": "agent",
+        "text": "价保"
+      },
+      {
+        "role": "agent",
+        "text": "款项原路返回"
+      },
+      {
+        "role": "agent",
+        "text": "一般[数字x]-[数字x]个工作日左右到账"
+      },
+      {
+        "role": "agent",
+        "text": "您之后注意查收哦"
+      },
+      {
+        "role": "user",
+        "text": "我新买了一个iPad"
+      }
+    ],
+    "query": "也可以降价的时候退差价吗",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "差价"
+      ],
+      "note": "真实多轮：保价差价",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_012",
+    "source_session": "2d90d734e09ff19884ef15d64bf7e699",
+    "source_dialogue": "d_0023",
+    "history": [
+      {
+        "role": "user",
+        "text": "你好"
+      },
+      {
+        "role": "user",
+        "text": "你好"
+      },
+      {
+        "role": "user",
+        "text": "[订单编号:[ORDERID_10005700]，订单金额:[金额x]，下单时间:[日期x] [时间x]]"
+      },
+      {
+        "role": "agent",
+        "text": "有什么问题我可以帮您处理或解决呢?"
+      }
+    ],
+    "query": "这一款手机什么时候能够发货呀?",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "发货",
+        "发出",
+        "到货",
+        "物流",
+        "快递"
+      ],
+      "note": "真实多轮：物流发货",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_013",
+    "source_session": "2f673429cf74b431a95307d13b65e528",
+    "source_dialogue": "d_0024",
+    "history": [
+      {
+        "role": "user",
+        "text": "你好"
+      },
+      {
+        "role": "agent",
+        "text": "有什么问题我可以帮您处理或解决呢?"
+      },
+      {
+        "role": "user",
+        "text": "我刚做了评论"
+      },
+      {
+        "role": "agent",
+        "text": "亲爱的客户，APP端麻烦您点击对话框右下角的“+”，点击“订单”后，选择一下您需要咨询的订单哦，PC端在我的订单复制下哦，小妹这边帮您查询一下哦~"
+      },
+      {
+        "role": "user",
+        "text": "为什么没给我购物回馈"
+      },
+      {
+        "role": "agent",
+        "text": "亲爱的客户，APP端麻烦您点击对话框右下角的“+”，点击“订单”后，选择一下您需要咨询的订单哦，PC端在我的订单复制下哦，小妹这边帮您查询一下哦~"
+      }
+    ],
+    "query": "咨询订单号:[ORDERID_10003874]    商品ID:[数字x]",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "订单"
+      ],
+      "note": "真实多轮：订单修改",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_014",
+    "source_session": "3117ca7fdadedf0b9c9f41402295eec8",
+    "source_dialogue": "d_0025",
+    "history": [
+      {
+        "role": "agent",
+        "text": "[ORDERID_10003943]"
+      },
+      {
+        "role": "agent",
+        "text": "小妹查看下哦，请稍等#E-s[数字x]~"
+      },
+      {
+        "role": "user",
+        "text": "请问是什么快递?几号投递的?"
+      },
+      {
+        "role": "agent",
+        "text": "[站点x]您的订单正在配送途中，请您准备签收(配送员:[姓名x]，电话:[电话x])，感谢您的耐心等待。"
+      },
+      {
+        "role": "agent",
+        "text": "是否有联系配送呢"
+      },
+      {
+        "role": "user",
+        "text": "是京东直接配送吗?"
+      }
+    ],
+    "query": "没有收到货",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "发货",
+        "发出",
+        "到货",
+        "物流",
+        "快递"
+      ],
+      "note": "真实多轮：物流发货",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_015",
+    "source_session": "33207f536606b6f004592b0e8aa4e904",
+    "source_dialogue": "d_0026",
+    "history": [
+      {
+        "role": "user",
+        "text": "在吗"
+      },
+      {
+        "role": "agent",
+        "text": "您好，请问有什么可以帮您?#E-s[数字x]"
+      },
+      {
+        "role": "user",
+        "text": "昨天买的，今天就降价"
+      },
+      {
+        "role": "user",
+        "text": "补差价吧。?"
+      },
+      {
+        "role": "agent",
+        "text": "亲 这边订单未完成不能申请价保的哈"
+      }
+    ],
+    "query": "那我到货拒收，再从新下单可以吧?",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "发货",
+        "发出",
+        "到货",
+        "物流",
+        "快递"
+      ],
+      "note": "真实多轮：物流发货",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_016",
+    "source_session": "3709a7fa1dc9f7c58e2fcf06b02140b4",
+    "source_dialogue": "d_0028",
+    "history": [
+      {
+        "role": "user",
+        "text": "https://item.jd.com/4870951.html"
+      },
+      {
+        "role": "agent",
+        "text": "有什么问题我可以帮您处理或解决呢?"
+      },
+      {
+        "role": "agent",
+        "text": "您好"
+      },
+      {
+        "role": "agent",
+        "text": "请您提供下订单号，帮您查看一下，好吗?#E-s[数字x]"
+      },
+      {
+        "role": "user",
+        "text": "我申请退货了 为啥闪电退款?"
+      }
+    ],
+    "query": "售后服务单号:[数字x]",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "售后"
+      ],
+      "note": "真实多轮：售后政策",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_017",
+    "source_session": "3aeabf8b059a9d3cc593308885be2ee2",
+    "source_dialogue": "d_0030",
+    "history": [
+      {
+        "role": "agent",
+        "text": "但是里面是不包含运费的"
+      },
+      {
+        "role": "agent",
+        "text": "请您知悉·"
+      },
+      {
+        "role": "user",
+        "text": "我有一订单，想调换尺码"
+      },
+      {
+        "role": "user",
+        "text": "退货重新再买吗?"
+      },
+      {
+        "role": "agent",
+        "text": "可以提交申请等待售后"
+      },
+      {
+        "role": "agent",
+        "text": "审核"
+      }
+    ],
+    "query": "售后说三天内",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "售后"
+      ],
+      "note": "真实多轮：售后政策",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_018",
+    "source_session": "40d3f9c188d153c2b473eae31972be2b",
+    "source_dialogue": "d_0033",
+    "history": [
+      {
+        "role": "user",
+        "text": "我的货到底什么时候能到"
+      },
+      {
+        "role": "agent",
+        "text": "您好，请问有什么可以帮助您的么#E-s[数字x]"
+      },
+      {
+        "role": "user",
+        "text": "物流为什么这么慢"
+      },
+      {
+        "role": "user",
+        "text": "物流为什么这么慢"
+      },
+      {
+        "role": "agent",
+        "text": "亲爱的客户，还麻烦您提供下订单号，妹子这边给您查询哦~"
+      }
+    ],
+    "query": "咨询订单号:[ORDERID_10000563] 订单金额:[金额x] 下单时间:[日期x]",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "订单"
+      ],
+      "note": "真实多轮：订单修改",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_019",
+    "source_session": "47989879871e31200dac943dc0eb6b94",
+    "source_dialogue": "d_0036",
+    "history": [
+      {
+        "role": "user",
+        "text": "你好"
+      },
+      {
+        "role": "user",
+        "text": "可以帮我转快递吗"
+      },
+      {
+        "role": "agent",
+        "text": "有什么问题我可以帮您处理或解决呢?"
+      }
+    ],
+    "query": "可以帮我转快递吗",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "人工",
+        "客服"
+      ],
+      "note": "真实多轮：转接客服",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_020",
+    "source_session": "49f3b2b860d45af813899df4f0825600",
+    "source_dialogue": "d_0037",
+    "history": [
+      {
+        "role": "user",
+        "text": "所以我就不签收 不拆封"
+      },
+      {
+        "role": "agent",
+        "text": "好的，请您稍等，这边咨询不是一对一，同时需要回复多个消息，我会尽快回复您。#E-s[数字x]"
+      },
+      {
+        "role": "agent",
+        "text": "可以的哦"
+      },
+      {
+        "role": "agent",
+        "text": "直接拒收退款"
+      },
+      {
+        "role": "user",
+        "text": "哦哦"
+      },
+      {
+        "role": "user",
+        "text": "那好"
+      }
+    ],
+    "query": "需要给快递打电话吗",
+    "expect": {
+      "tool": "transfer_human",
+      "keywords": [
+        "人工"
+      ],
+      "note": "真实多轮：转人工",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_021",
+    "source_session": "4c15dd91e32c361ae6bd7baa9796badb",
+    "source_dialogue": "d_0038",
+    "history": [
+      {
+        "role": "agent",
+        "text": "有什么问题我可以帮您处理或解决呢?"
+      },
+      {
+        "role": "user",
+        "text": "您好，刚在京东平台购买了东西，我申请了电子发票"
+      },
+      {
+        "role": "user",
+        "text": "购买的东西有赠品，请问赠品会不会显示在发票上面"
+      },
+      {
+        "role": "agent",
+        "text": "此单查看您选择的是电子发票"
+      },
+      {
+        "role": "agent",
+        "text": "我们发票按照订单商品开具的"
+      },
+      {
+        "role": "agent",
+        "text": "会有显示的"
+      }
+    ],
+    "query": "可以备注下不显示么，只把我付款的东西开发票",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "发票"
+      ],
+      "note": "真实多轮：发票",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_022",
+    "source_session": "4f78b176780c7e6f7a6612f6af2a0c53",
+    "source_dialogue": "d_0040",
+    "history": [
+      {
+        "role": "agent",
+        "text": "您好，请问有什么可以帮助您的么#E-s[数字x]"
+      },
+      {
+        "role": "user",
+        "text": "我买的东西怎么显示拒收了"
+      },
+      {
+        "role": "agent",
+        "text": "云麦(YUNMAI)好轻mini[数字x]白色智能体脂秤 电子秤 脂肪秤 体重秤 [数字x]4项身体数据 蓝牙连接 APP控制 [商品快照]"
+      },
+      {
+        "role": "agent",
+        "text": "为了更好的解决您的问题，需要核实一下商品的信息奥，请问是这个商品吗?"
+      },
+      {
+        "role": "user",
+        "text": "对"
+      }
+    ],
+    "query": "我不要了，怎么退款",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "退款",
+        "退货"
+      ],
+      "note": "真实多轮：退货退款",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_023",
+    "source_session": "533b54f3a1c5f9feec615b491149517f",
+    "source_dialogue": "d_0042",
+    "history": [
+      {
+        "role": "user",
+        "text": "在"
+      },
+      {
+        "role": "agent",
+        "text": "有什么问题我可以帮您处理或解决呢?"
+      },
+      {
+        "role": "agent",
+        "text": "请您稍等一下，正在为您核实处理中哦~"
+      }
+    ],
+    "query": "为什么我都退货好几天了，还是审核",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "退款",
+        "退货"
+      ],
+      "note": "真实多轮：退货退款",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_024",
+    "source_session": "557d8298032540ed79b9ae8b89f01d2b",
+    "source_dialogue": "d_0043",
+    "history": [
+      {
+        "role": "user",
+        "text": "?"
+      },
+      {
+        "role": "agent",
+        "text": "好的，请您稍等，这边咨询不是一对一，同时需要回复多个消息，我会尽快回复您。#E-s[数字x]"
+      },
+      {
+        "role": "agent",
+        "text": "非常抱歉，订单信息是不能够更改的哦，因为订单一旦生成是无法修改的。建议您可以让您的朋友帮您代收哦亲，这个是选择的自提，只可以自取呢，"
+      },
+      {
+        "role": "agent",
+        "text": "您看地址远吗"
+      },
+      {
+        "role": "user",
+        "text": "[地址x]"
+      },
+      {
+        "role": "agent",
+        "text": "建议您申请退款哦亲"
+      }
+    ],
+    "query": "现在不能取消订单啊",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "订单"
+      ],
+      "note": "真实多轮：订单修改",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_025",
+    "source_session": "571a7ba0981697828242ad752afbd962",
+    "source_dialogue": "d_0044",
+    "history": [
+      {
+        "role": "user",
+        "text": "对"
+      },
+      {
+        "role": "user",
+        "text": "是这个商品"
+      },
+      {
+        "role": "user",
+        "text": "为什么没有发货啊"
+      },
+      {
+        "role": "agent",
+        "text": "调货的亲"
+      },
+      {
+        "role": "agent",
+        "text": "周期预计是[数字x]-[数字x]天左右的么"
+      },
+      {
+        "role": "user",
+        "text": "[数字x]-[数字x]天发货还是能到货"
+      }
+    ],
+    "query": "昨天我下单的时候可是说今天能到货啊",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "发货",
+        "发出",
+        "到货",
+        "物流",
+        "快递"
+      ],
+      "note": "真实多轮：物流发货",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_026",
+    "source_session": "5904d88b790d039b57fa49869ca01b3f",
+    "source_dialogue": "d_0045",
+    "history": [
+      {
+        "role": "user",
+        "text": "订单号:&nbsp;[ORDERID_10002470]"
+      },
+      {
+        "role": "agent",
+        "text": "的订单预计[数字x]月[数字x]5日送达您手中"
+      },
+      {
+        "role": "agent",
+        "text": "我们的配送员送货前一般会电话联系您的，您到时如果收货不方便的话您可以和师傅协商呢，一般可以在站点停留[数字x]-[数字x]天的，您看可以吗?"
+      },
+      {
+        "role": "user",
+        "text": "订单号:&nbsp;[ORDERID_10005601]"
+      },
+      {
+        "role": "user",
+        "text": "你那里不能改了吗"
+      },
+      {
+        "role": "agent",
+        "text": "您好，正常情况下订单提交成功是不支持修改的呢，麻烦您看下订单详情页是否有“修改”的按钮，如有，您可点击修改末级地址/联系人/电话号码/送货时间信息，如没有修改按钮，说明订单已不支持修改了呢，还请您理解哦~#E-s[数字x]#E-s[数字x]"
+      }
+    ],
+    "query": "主要是他们一般到了才打电话，我怕他们白跑一趟",
+    "expect": {
+      "tool": "transfer_human",
+      "keywords": [
+        "人工"
+      ],
+      "note": "真实多轮：转人工",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_027",
+    "source_session": "5d4d99abd845241222941503f58bc577",
+    "source_dialogue": "d_0047",
+    "history": [
+      {
+        "role": "user",
+        "text": "你好"
+      },
+      {
+        "role": "agent",
+        "text": "请问您是咨询之前的问题还是有其他的问题需要处理呢?"
+      },
+      {
+        "role": "user",
+        "text": "[ORDERID_10000924]"
+      },
+      {
+        "role": "user",
+        "text": "[ORDERID_10000976]、"
+      }
+    ],
+    "query": "这[数字x]张订单的配送时间能不能改成[数字x]号[数字x]点之后，刚才忘了选了",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "发货",
+        "发出",
+        "到货",
+        "物流",
+        "快递"
+      ],
+      "note": "真实多轮：物流发货",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_028",
+    "source_session": "5eefae60d7a86316b8e749aae8e23ccb",
+    "source_dialogue": "d_0048",
+    "history": [
+      {
+        "role": "user",
+        "text": "亲亲 对不起实在是不好意思 手机坏了 所以想要购新机，然而还没等收到货呢，爸爸昨天出差给我买回来手机，怎么办，"
+      },
+      {
+        "role": "user",
+        "text": "[订单编号:[ORDERID_10000532]，订单金额:[金额x]，下单时间:[日期x] [时间x]]"
+      },
+      {
+        "role": "agent",
+        "text": "首先建议您可以自己在您的 -我的京东-我的订单 -操作取消哟(温馨提示:请您取消前注意商品是否有缺货、价格上涨等情况哦，还请您谨慎操作呢)"
+      }
+    ],
+    "query": "取消了订单 可是已经在送来的路上了",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "订单"
+      ],
+      "note": "真实多轮：订单修改",
+      "kw_mode": "any"
+    }
+  },
+  {
+    "id": "mt_029",
+    "source_session": "639d2e147f2504009c08d7c2d0d95e7f",
+    "source_dialogue": "d_0050",
+    "history": [
+      {
+        "role": "agent",
+        "text": "请问有什么可以帮您?"
+      },
+      {
+        "role": "user",
+        "text": "[ORDERID_10001712]这个订单怎么不动了"
+      }
+    ],
+    "query": "说好昨天到货啊",
+    "expect": {
+      "tool": "search_kb",
+      "keywords": [
+        "发货",
+        "发出",
+        "到货",
+        "物流",
+        "快递"
+      ],
+      "note": "真实多轮：物流发货",
+      "kw_mode": "any"
+    }
+  }
+]
