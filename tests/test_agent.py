@@ -223,6 +223,38 @@ def test_llm_client_cached_reuse():
         reset_clients()
 
 
+def test_webapp_session_eviction():
+    """内存字典淘汰（v6.3）：超上限丢最旧会话，当前会话永不被淘汰。"""
+    import webapp.server as srv
+
+    old_cap = srv._MAX_LIVE_SESSIONS
+    srv._MAX_LIVE_SESSIONS = 3
+    saved_sessions = dict(srv.SESSIONS)
+    saved_turns = dict(srv._TURNS)
+    saved_memories = dict(srv._MEMORIES)
+    srv.SESSIONS.clear()
+    srv._TURNS.clear()
+    srv._MEMORIES.clear()
+    try:
+        for i in range(5):
+            srv._get_session(f"t_evict_{i}")
+        assert len(srv.SESSIONS) == 3           # 淘汰到上限
+        assert "t_evict_0" not in srv.SESSIONS  # 最旧的被淘汰
+        assert "t_evict_4" in srv.SESSIONS      # 最新仍在
+        # 当前会话（刚插入的）即使触发淘汰也永不被淘汰
+        srv.SESSIONS.clear(); srv._TURNS.clear(); srv._MEMORIES.clear()
+        srv._MAX_LIVE_SESSIONS = 1
+        srv.SESSIONS["t_old"] = "x"
+        srv._get_session("t_new")
+        assert "t_new" in srv.SESSIONS          # 新会话存活
+        assert "t_old" not in srv.SESSIONS      # 旧会话让位
+    finally:
+        srv._MAX_LIVE_SESSIONS = old_cap
+        srv.SESSIONS.clear(); srv.SESSIONS.update(saved_sessions)
+        srv._TURNS.clear(); srv._TURNS.update(saved_turns)
+        srv._MEMORIES.clear(); srv._MEMORIES.update(saved_memories)
+
+
 # ----------------------------------------------------------------------
 # 5. ReAct 解析
 # ----------------------------------------------------------------------

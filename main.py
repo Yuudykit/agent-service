@@ -68,6 +68,10 @@ def main() -> None:
         except RuntimeError as e:
             print(f"客服> [错误] {e}")
             continue
+        except Exception as e:  # 鉴权/网络/协议等未知异常：打印后继续，不打断交互循环
+            print(f"客服> [异常] {type(e).__name__}: {e}")
+            print("       （若是鉴权失败，请检查 config.json 的 api_key；退出请输入 exit）")
+            continue
         print("客服>", answer)
 
 

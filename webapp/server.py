@@ -23,6 +23,9 @@ webapp server：把 main.py 的 CLI 包成 Web 接口，零第三方依赖。
     - "新会话"按钮 = 换一个新 session_id。
     - 会话级记忆（v6.1）：每个会话一个 Memory 实例，画像/摘要落盘
       data/memory/{sid}.json，跨重启随会话一起恢复。
+    - 内存缓存淘汰（v6.2）：SESSIONS/_TURNS/_MEMORIES 超过
+      _MAX_LIVE_SESSIONS（默认 200）按 FIFO 丢最旧；磁盘数据都在，
+      下次访问自动懒加载，长期运行不再缓慢泄漏。
 
 用量护栏（P2）：
     - 日预算：真实模式 token 累计到 data/usage/{日期}.json，超过
@@ -105,6 +108,7 @@ def _get_session(sid: str) -> tuple[str, ContextManager, int]:
         sid = sid or uuid.uuid4().hex[:12]
     SESSIONS[sid] = ctx
     _TURNS[sid] = turns
+    _evict_stale(sid)  # v6.2：超上限丢最旧会话的内存缓存（磁盘还在，可懒加载）
     return sid, ctx, turns
 
 
@@ -115,6 +119,22 @@ _TURNS: dict[str, int] = {}
 # 共用全局 data/memory.json 会让不同访客的画像互相污染。
 _MEMORY_DIR = os.path.join(_ROOT, "data", "memory")
 _MEMORIES: dict[str, Memory] = {}
+
+# 内存字典淘汰（v6.2）：SESSIONS/_TURNS/_MEMORIES 常驻内存无上限，
+# 长期运行会缓慢泄漏。会话历史/轮次/画像每轮都已落盘，淘汰只丢
+# 内存缓存，下次访问自动懒加载，所以按 FIFO 超上限丢最旧即可。
+_MAX_LIVE_SESSIONS = 200
+
+
+def _evict_stale(keep_sid: str) -> None:
+    """超过 _MAX_LIVE_SESSIONS 时，按插入顺序淘汰最旧会话的内存缓存。"""
+    while len(SESSIONS) > _MAX_LIVE_SESSIONS:
+        oldest = next((s for s in SESSIONS if s != keep_sid), None)
+        if oldest is None:
+            break
+        SESSIONS.pop(oldest, None)
+        _TURNS.pop(oldest, None)
+        _MEMORIES.pop(oldest, None)
 
 
 def _get_memory(sid: str) -> Memory:
