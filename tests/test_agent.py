@@ -173,6 +173,38 @@ def test_memory_persist_reload():
         assert "退款" in mem2.recall()
 
 
+def test_memory_session_isolation():
+    """会话级记忆：不同 session 的画像互不污染，各自落盘（v6.1 webapp 接入）。"""
+    import webapp.server as srv  # 导入副作用：chdir 到项目根（pytest 本就从根目录跑）
+
+    sid_a, sid_b = "t_mem_iso_a", "t_mem_iso_b"
+    path_a = os.path.join("data", "memory", f"{sid_a}.json")
+    path_b = os.path.join("data", "memory", f"{sid_b}.json")
+    try:
+        mem_a = srv._get_memory(sid_a)
+        mem_b = srv._get_memory(sid_b)
+        assert os.path.abspath(mem_a.path) == os.path.abspath(path_a)
+        mem_a.update_profile("我要开增值税专用发票")
+        assert mem_a.profile.get("enterprise_invoice") == "需要企业发票"
+        assert not mem_b.profile.get("enterprise_invoice")  # 画像不串会话
+        assert os.path.exists(path_a)  # 独立落盘成功
+    finally:
+        srv._MEMORIES.pop(sid_a, None)
+        srv._MEMORIES.pop(sid_b, None)
+        for p in (path_a, path_b):
+            if os.path.exists(p):
+                os.remove(p)
+
+
+def test_e2e_memory_updates_profile_via_run():
+    """run() 传入 memory 后，用户发言应喂给画像（CLI/Web 同一路径）。"""
+    with tempfile.TemporaryDirectory() as tmp:
+        mem = Memory(path=os.path.join(tmp, "m.json"))
+        ctx = ContextManager(max_tokens=4096)
+        run("退款多久能到账？", ctx, mock=True, memory=mem)
+        assert "退款" in mem.recall()  # 画像已记录用户意图
+
+
 # ----------------------------------------------------------------------
 # 5. ReAct 解析
 # ----------------------------------------------------------------------

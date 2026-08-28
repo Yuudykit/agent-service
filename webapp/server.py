@@ -21,6 +21,8 @@ webapp server：把 main.py 的 CLI 包成 Web 接口，零第三方依赖。
     - 每个 session_id 一个 ContextManager；重启不丢——每轮结束落盘
       data/sessions/{sid}.json（消息历史 + 轮次计数），启动懒加载。
     - "新会话"按钮 = 换一个新 session_id。
+    - 会话级记忆（v6.1）：每个会话一个 Memory 实例，画像/摘要落盘
+      data/memory/{sid}.json，跨重启随会话一起恢复。
 
 用量护栏（P2）：
     - 日预算：真实模式 token 累计到 data/usage/{日期}.json，超过
@@ -47,6 +49,7 @@ sys.path.insert(0, _ROOT)
 
 from core.agent_loop import run            # noqa: E402
 from core.context import ContextManager    # noqa: E402
+from core.memory import Memory             # noqa: E402
 from core.prompts import build_system_prompt  # noqa: E402
 from tools.fallback import bind_session, fallback_message, unbind_session  # noqa: E402
 
@@ -106,6 +109,21 @@ def _get_session(sid: str) -> tuple[str, ContextManager, int]:
 
 
 _TURNS: dict[str, int] = {}
+
+# 会话级记忆：每个 session_id 一个独立 Memory（v6.1 接入）。
+# 无用户认证的演示场景里 session_id 就是身份的最小单位——
+# 共用全局 data/memory.json 会让不同访客的画像互相污染。
+_MEMORY_DIR = os.path.join(_ROOT, "data", "memory")
+_MEMORIES: dict[str, Memory] = {}
+
+
+def _get_memory(sid: str) -> Memory:
+    """取会话记忆：内存 → 按路径懒加载（data/memory/{sid}.json）。"""
+    mem = _MEMORIES.get(sid)
+    if mem is None:
+        mem = Memory(path=os.path.join(_MEMORY_DIR, f"{sid}.json"))
+        _MEMORIES[sid] = mem
+    return mem
 
 
 # ----------------------------------------------------------------------
@@ -278,6 +296,7 @@ class Handler(BaseHTTPRequestHandler):
                         system_prompt=build_system_prompt(),
                         mock=mock,
                         max_steps=CONFIG["max_react_steps"],
+                        memory=_get_memory(sid),  # v6.1：会话级记忆（画像注入+更新）
                         on_event=on_event,
                     )
                 finally:
