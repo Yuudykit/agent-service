@@ -72,11 +72,11 @@ class Memory:
 
     def _summarize_llm(self, messages: list[dict]) -> str:
         """调 LLM 压缩摘要：只保留事实，可被后续对话直接使用。"""
-        import openai  # 延迟导入
+        from core.llm_client import get_client
 
         with open("config.json", encoding="utf-8") as f:
             cfg = json.load(f)
-        client = openai.OpenAI(api_key=cfg["api_key"], base_url=cfg["base_url"])
+        client = get_client(cfg["api_key"], cfg["base_url"])
         transcript = "\n".join(
             f"{m['role']}: {m.get('content') or ''}" for m in messages if m.get("content")
         )

@@ -205,6 +205,24 @@ def test_e2e_memory_updates_profile_via_run():
         assert "退款" in mem.recall()  # 画像已记录用户意图
 
 
+def test_llm_client_cached_reuse():
+    """client 复用（v6.2）：同配置返回同一实例；换 key 重建；reset 清空。"""
+    from core.llm_client import get_client, reset_clients
+
+    reset_clients()
+    try:
+        a = get_client("sk-test-1", "https://api.test/v1")
+        b = get_client("sk-test-1", "https://api.test/v1")
+        c = get_client("sk-test-2", "https://api.test/v1")
+        assert a is b          # 同 (key, base_url) 复用连接池
+        assert a is not c      # 配置变了必须重建
+        reset_clients()
+        d = get_client("sk-test-1", "https://api.test/v1")
+        assert d is not a      # reset 后重建
+    finally:
+        reset_clients()
+
+
 # ----------------------------------------------------------------------
 # 5. ReAct 解析
 # ----------------------------------------------------------------------

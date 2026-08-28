@@ -28,6 +28,7 @@ import time
 from typing import Any, Callable, Optional
 
 from core.context import ContextManager
+from core.llm_client import get_client
 from core.memory import Memory
 from core.prompts import build_system_prompt
 from tools.fallback import fallback_message
@@ -180,16 +181,13 @@ def chat(
         return msg
 
     # ---- 真实调用：DeepSeek（OpenAI 兼容）----
-    import openai  # 延迟导入，mock 模式不依赖
-
     config = _load_config()
     if not config.get("api_key"):
         raise RuntimeError(
             "config.json 的 api_key 为空。请填入 DeepSeek API key，"
             "或改用 --mock 模式离线演示。"
         )
-    client = openai.OpenAI(
-        api_key=config["api_key"], base_url=config["base_url"], timeout=60)
+    client = get_client(config["api_key"], config["base_url"])
     payload = {
         "model": config["model"],
         "messages": [{"role": "system", "content": system_prompt}, *messages],

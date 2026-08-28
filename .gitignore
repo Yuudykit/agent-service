@@ -7,6 +7,7 @@ data/handoffs/
 data/usage/
 data/bad_cases.jsonl
 data/memory.json
+data/memory/
 logs/
 
 # ---- 原始数据与中间产物（太大且非代码，JDDC 数据集见 README 说明）----
