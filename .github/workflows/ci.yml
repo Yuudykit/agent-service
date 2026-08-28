@@ -18,10 +18,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      # 项目零第三方依赖（标准库实现 RAG/循环/工具），
-      # 只有 pytest 是测试运行器
-      - name: Install test runner
-        run: pip install pytest
+      # RAG/循环/工具链零第三方依赖（标准库实现），测试只需 pytest；
+      # openai 是真实模式的依赖（requirements.txt），client 复用测试
+      # 需要真实构造 client 实例，故一并安装
+      - name: Install test deps
+        run: pip install pytest openai
 
       # config.json 被 .gitignore 排除（含 API key），CI 用脱敏模板顶上
       - name: Prepare config
