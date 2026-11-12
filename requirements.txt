@@ -1,7 +1,2 @@
-# agent-service 依赖（Day 4-8 逐步启用）
-openai>=1.0          # DeepSeek API 兼容 OpenAI 协议；dashscope embedding 后端也用
-numpy               # RAG 向量余弦相似度
-sentence-transformers  # 本地 embedding 后端（bge/bge-m3/m3e）：
-#                        EMBEDDER_BACKEND=bge 切到 bge-small-zh-v1.5（512 维，已实测 58/58）
-modelscope          # 国内下载本地模型（BAAI/bge-small-zh-v1.5 等，HF 镜像不稳时用）
-# chromadb           # Day 5 视情况引入（先手写检索，能讲原理）
+# 真实模型和 DashScope API 客户端
+openai>=1.0

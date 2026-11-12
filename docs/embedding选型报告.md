@@ -1,5 +1,7 @@
 # Embedding 模型选型报告（与 DeepSeek 搭配）
 
+模型信息、榜单和价格为调研日期的记录。第六节是项目内 7 条样本的对比实验。
+
 > 调研日期：2026-08-27 ｜ 结论先行：**DeepSeek 官方没有 embedding 接口**，
 > RAG 里 embedding 与 LLM 解耦是业界标准做法——DeepSeek 负责生成，
 > embedding 选第三方专用模型（本地开源首选 BGE 系列，云端 API 首选阿里 text-embedding-v4）。
@@ -83,7 +85,7 @@ EMBEDDER_BACKEND=dashscope 阿里 text-embedding-v4（需 DASHSCOPE_API_KEY）
 
 - 索引文件按后端隔离：`kb_index_{backend}.json`，切换后端不会互相覆盖。
 - 检索接口 `retrieve(query)` 完全不变——embedding 是插件化的，换模型零业务改动。
-- 依赖：`pip install sentence-transformers`（bge/bge-m3/m3e 本地后端用）。
+- 本地后端依赖可通过 `python -m pip install -r requirements-embeddings.txt` 安装。
 - 模型下载：国内环境优先 ModelScope（`snapshot_download('BAAI/bge-small-zh-v1.5')`，
   落到 `models/modelscope/models/`，`embedder.py` 自动优先加载本地；
   不依赖 ModelScope 时回落 HF，配 `HF_ENDPOINT=https://hf-mirror.com`。

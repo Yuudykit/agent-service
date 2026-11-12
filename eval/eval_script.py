@@ -1,16 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-评测脚本 —— 对标 JD 隐含要求：Agent 评估/监控
+离线 mock 回归入口。
 
-职责：用标准测试对话，量化 Agent 的表现。开发期验收脚本是
-      scripts/run_eval_p0.py（28 用例快速回归）；本文件是正式评测入口，
-      输出四指标报告，供面试展示与持续监控。
-
-指标（面试必答）:
-    - 工具路由准确率：期望调用工具 X 的用例里，实际正确路由到 X 的比例
-    - 回答准确率：最终回答命中期望关键词的比例（宽松判分）
-    - 兜底正确率：期望不调工具（寒暄/无关话题）时，确实没调工具的比例
-    - 多轮通过率：多轮用例（turns>1）中，所有轮次都达标的比例
+每条用例检查调用过的工具和最后一轮回答的关键词。报告总体通过数、
+工具断言通过数、关键词断言通过数和带历史用例的通过数。
+任一用例失败时以非零状态退出，供 CI 检查。
 
 用法：
     python -m eval.eval_script [--verbose]
@@ -18,9 +12,8 @@
 from __future__ import annotations
 
 import json
-import os
 import sys
-from typing import Any, Optional
+from typing import Any
 
 sys.path.insert(0, ".")
 
@@ -28,7 +21,6 @@ import tools  # noqa: F401  触发工具注册
 from core.agent_loop import run
 from core.context import ContextManager
 from core.prompts import build_system_prompt
-from tools import registry
 
 
 class _ToolRecorder:
@@ -56,7 +48,7 @@ class _ToolRecorder:
 
 
 def load_test_cases(path: str = "data/eval_set.json",
-                    extra: str = "data/eval_multiturn.json") -> list[dict]:
+                    extra: str | None = "data/eval_multiturn.json") -> list[dict]:
     """加载评测用例。
 
     两份数据：
@@ -69,7 +61,7 @@ def load_test_cases(path: str = "data/eval_set.json",
     cases = []
     with open(path, encoding="utf-8") as f:
         cases.extend(json.load(f))
-    if os.path.exists(extra):
+    if extra is not None:
         with open(extra, encoding="utf-8") as f:
             cases.extend(json.load(f))
     return cases
@@ -82,6 +74,8 @@ def _tool_hits(recorder: "_ToolRecorder") -> set[str]:
 def run_eval(mock: bool = True, verbose: bool = False) -> dict:
     """跑评测，返回指标汇总 + 逐条明细。"""
     cases = load_test_cases()
+    if not cases:
+        raise ValueError("评测集为空")
     system_prompt = build_system_prompt()
     detail: list[dict[str, Any]] = []
 
@@ -185,4 +179,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args()
-    print_report(run_eval(mock=True, verbose=args.verbose))
+    metrics = run_eval(mock=True, verbose=args.verbose)
+    print_report(metrics)
+    sys.exit(0 if metrics["passed"] == metrics["total"] else 1)

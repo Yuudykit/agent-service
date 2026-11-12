@@ -24,6 +24,8 @@ import os
 import re
 from typing import Any, Optional
 
+from core.config import load_config
+
 # 业务意图词 → 画像标签（客服场景）
 _INTENT_RULES: list[tuple[str, str]] = [
     ("发票|开票|税号|报销", "发票"),
@@ -65,8 +67,7 @@ class Memory:
 
     def _has_api_key(self) -> bool:
         try:
-            with open("config.json", encoding="utf-8") as f:
-                return bool(json.load(f).get("api_key"))
+            return bool(load_config().get("api_key"))
         except (OSError, json.JSONDecodeError):
             return False
 
@@ -74,8 +75,7 @@ class Memory:
         """调 LLM 压缩摘要：只保留事实，可被后续对话直接使用。"""
         from core.llm_client import get_client
 
-        with open("config.json", encoding="utf-8") as f:
-            cfg = json.load(f)
+        cfg = load_config()
         client = get_client(cfg["api_key"], cfg["base_url"])
         transcript = "\n".join(
             f"{m['role']}: {m.get('content') or ''}" for m in messages if m.get("content")

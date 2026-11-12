@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agent 运行监控 · 售后工作台</title>
+  <link rel="stylesheet" href="/app.css">
+  <link rel="stylesheet" href="/monitor.css">
+  <script src="/monitor.js" defer></script>
+</head>
+<body class="monitor-body">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark monitor-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <div><strong>运行监控</strong><span class="brand-caption">售后工作台</span></div>
+    </div>
+    <div class="header-actions">
+      <span class="mode-badge" id="connection"><i></i><span id="connection-text">正在连接</span></span>
+      <a href="/" class="button button-quiet monitor-link">打开工作台 ↗</a>
+    </div>
+  </header>
+  <main class="monitor">
+    <div class="monitor-heading">
+      <div>
+        <h1>Agent 运行概览</h1>
+        <p>查看每轮请求的状态、工具调用和用户反馈。</p>
+      </div>
+      <div class="monitor-filters" aria-label="筛选监控数据">
+        <label class="sr-only" for="mode-filter">运行模式</label>
+        <select id="mode-filter">
+          <option value="all">全部模式</option><option value="mock">离线演示</option><option value="real">真实模型</option>
+        </select>
+        <label class="sr-only" for="service-filter">服务类型</label>
+        <select id="service-filter">
+          <option value="all">全部服务</option><option value="faq">售后问答</option><option value="order">订单查询</option>
+          <option value="refund">退款试算</option><option value="handoff">转人工交接</option><option value="other">其他问题</option>
+        </select>
+        <button class="button button-quiet" id="refresh" type="button">刷新</button>
+      </div>
+    </div>
+    <p class="notice" id="monitor-notice" role="status" hidden></p>
+    <section class="metrics" aria-label="关键指标">
+      <article class="metric-card">
+        <h2>已记录请求</h2><strong id="metric-total">—</strong><p id="sample-note">等待记录</p>
+      </article>
+      <article class="metric-card">
+        <h2>回复返回率</h2><strong id="metric-returned">—</strong><p id="returned-note">按服务端结束帧计算</p>
+      </article>
+      <article class="metric-card">
+        <h2>P95 总耗时</h2><strong id="metric-latency">—</strong><p id="latency-note">已返回回复的请求</p>
+      </article>
+      <article class="metric-card">
+        <h2>回复有帮助率</h2><strong id="metric-helpful">—</strong><p id="rating-note">等待用户评价</p>
+      </article>
+    </section>
+
+    <div class="insight-grid">
+      <section class="monitor-card">
+        <div class="card-head"><h2>服务分布</h2><span>按请求数</span></div>
+        <div id="service-bars" class="distribution"></div>
+      </section>
+      <section class="monitor-card">
+        <div class="card-head"><h2>运行状态与反馈</h2><span id="token-total"></span></div>
+        <dl id="outcome-counts" class="outcome-counts"></dl>
+        <div id="feedback-reasons" class="feedback-reasons" hidden>
+          <h3>没帮助的原因</h3><ul id="reason-list"></ul>
+        </div>
+      </section>
+    </div>
+
+    <section class="monitor-card request-card">
+      <div class="card-head"><h2>最近请求</h2><span id="update-time" role="status"></span></div>
+      <div id="empty-requests" class="empty-requests">
+        <strong>还没有符合条件的请求</strong>
+        <p>在工作台发起一次查单或退款试算，给回复点个评价，再回来查看本轮记录。</p>
+        <a class="button button-primary monitor-link" href="/">去工作台</a>
+      </div>
+      <div class="table-scroll" id="request-table" hidden>
+        <table>
+          <thead><tr><th scope="col">请求编号</th><th scope="col">时间</th><th scope="col">运行模式</th><th scope="col">服务</th><th scope="col">状态</th><th scope="col">耗时</th><th scope="col">用户评价</th></tr></thead>
+          <tbody id="request-rows"></tbody>
+        </table>
+      </div>
+    </section>
+    <p class="monitor-foot" id="window-note"></p>
+  </main>
+
+  <dialog id="request-detail" aria-labelledby="detail-title">
+    <div class="detail-heading">
+      <div><h2 id="detail-title">请求详情</h2><p id="detail-id"></p></div>
+      <form method="dialog"><button class="button button-quiet" type="submit">关闭</button></form>
+    </div>
+    <dl class="detail-values" id="detail-values"></dl>
+    <section class="detail-tools"><h3>工具调用顺序</h3><ol id="detail-tool-list"></ol><p id="detail-no-tools" hidden>本轮没有工具调用。</p></section>
+  </dialog>
+</body>
+</html>

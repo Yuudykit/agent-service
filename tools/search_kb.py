@@ -12,7 +12,7 @@ P1 升级（vs P0）：
     P1 走 rag 包完整管线：
         retriever（关键词通道 + 向量通道加权）→ reranker（规则精排）
     向量通道用 rag.embedder 的特征哈希向量（零依赖），
-    真实项目可设 EMBEDDER_BACKEND=ml 切到 m3e-small，接口不变。
+    可设 EMBEDDER_BACKEND=bge 切换到本地 BGE 后端。
 
 输出格式约定（与 core/agent_loop._mock_chat 的解析耦合，勿改）：
     - 首行以 [检索结果] 开头
@@ -20,22 +20,11 @@ P1 升级（vs P0）：
 """
 from __future__ import annotations
 
-import json
 import re
 
 from rag.retriever import retrieve
 from rag.reranker import rerank
 from tools.registry import register_tool
-
-
-def _load_kb(path: str | None = None) -> list[dict]:
-    """加载知识库（保留给 fallback 等模块复用）。path 默认取 config 配置。"""
-    if path is None:
-        with open("config.json", encoding="utf-8") as f:
-            cfg = json.load(f)
-        path = cfg["knowledge_base_path"]
-    with open(path, encoding="utf-8") as f:
-        return json.load(f)
 
 
 @register_tool

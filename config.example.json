@@ -2,12 +2,8 @@
  "api_key": "",
  "base_url": "https://api.deepseek.com",
  "model": "deepseek-chat",
- "embedding_model": "moka-ai/m3e-small",
  "max_context_tokens": 4096,
- "summary_trigger_tokens": 3000,
  "max_react_steps": 3,
- "knowledge_base_path": "data/kb.json",
- "default_fallback": "转人工",
  "daily_token_budget": 200000,
  "max_turns_per_session": 50
 }

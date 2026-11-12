@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-agent-service 入口：命令行交互循环。
+电商售后智能客服 Agent 入口：命令行交互循环。
 
 用法:
     python main.py [--mock] [--verbose]
@@ -11,19 +11,13 @@ agent-service 入口：命令行交互循环。
 Day 4 完成 agent_loop.py 后，这里能跑通"多轮对话 + 工具调用"。
 """
 import argparse
-import json
 import sys
 
 from core.agent_loop import run
+from core.config import load_config
 from core.context import ContextManager
 from core.memory import Memory
 from core.prompts import build_system_prompt
-
-
-def load_config(path: str = "config.json") -> dict:
-    """读取配置文件。"""
-    with open(path, encoding="utf-8") as f:
-        return json.load(f)
 
 
 def main() -> None:

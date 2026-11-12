@@ -158,19 +158,19 @@ def _write_handoff(reason: str) -> Optional[str]:
 
 @register_tool
 def transfer_human(reason: str = "") -> str:
-    """转接人工客服。当用户情绪激动、问题超出知识库范围、或用户明确要求人工时使用。
+    """生成本地人工交接记录并提供人工客服渠道。
 
-    参数 reason 用于记录转人工原因，便于后续复盘。
+    用户明确要求人工、情绪激动或问题超出知识库范围时使用。reason 记录具体诉求。
     """
     ticket = _write_handoff(reason)
     cause = f"（原因：{reason}）" if reason else ""
     if ticket:
         return (
-            f"[转人工] 已为您转接人工客服，您的工单号是 {ticket}，"
-            f"人工客服将参考本次对话记录为您服务。{HUMAN_CONTACTS}{cause}"
+            f"[转人工] 已生成本地人工交接记录，编号 {ticket}。"
+            f"如需联系人工客服，可通过{HUMAN_CONTACTS}。{cause}"
         )
     return (
-        f"[转人工] 已为您转接人工客服。{HUMAN_CONTACTS}"
+        f"[转人工] 本地人工交接记录未能保存。如需联系人工客服，可通过{HUMAN_CONTACTS}。"
         f"{cause}"
     )
 

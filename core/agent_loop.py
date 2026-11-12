@@ -27,6 +27,7 @@ import os
 import time
 from typing import Any, Callable, Optional
 
+from core.config import load_config
 from core.context import ContextManager
 from core.llm_client import get_client
 from core.memory import Memory
@@ -58,7 +59,8 @@ def _mock_judge(user_text: str) -> dict[str, Any]:
 
     # 0) 转人工（最高优先级）
     if any(w in text for w in _HUMAN_WORDS):
-        return {"tool": "transfer_human", "arguments": {"reason": "用户要求转人工"}}
+        reason = text.partition("诉求：")[2].strip() or "用户要求转人工"
+        return {"tool": "transfer_human", "arguments": {"reason": reason}}
 
     # 1) 订单号（JD 前缀 + 数字，或 10 位以上纯数字）→ 精确查询 / 退款计算
     #    语境分流：含"钱/多少/算"（金额语境）→ calculate_refund；否则查状态/物流 → query_info
@@ -113,7 +115,7 @@ def _mock_chat(messages: list[dict]) -> dict[str, Any]:
         if content.startswith("[转人工]"):
             return {
                 "role": "assistant",
-                "content": "好的，已为您转接人工客服，请稍候。您也可以通过热线 950618 或 App 内「我的-客户服务」在线咨询。",
+                "content": content.removeprefix("[转人工]").lstrip(),
             }
         if content.startswith("[NOT_FOUND]"):
             return {
@@ -181,11 +183,11 @@ def chat(
         return msg
 
     # ---- 真实调用：DeepSeek（OpenAI 兼容）----
-    config = _load_config()
+    config = load_config()
     if not config.get("api_key"):
         raise RuntimeError(
-            "config.json 的 api_key 为空。请填入 DeepSeek API key，"
-            "或改用 --mock 模式离线演示。"
+            "请将 config.example.json 复制为 config.json 并填写 API Key，"
+            "或使用 mock 模式离线演示。"
         )
     client = get_client(config["api_key"], config["base_url"])
     payload = {
@@ -312,11 +314,6 @@ def _chat_stream(client, payload: dict, on_delta: Callable[[str], None]) -> dict
     if usage:
         result["usage"] = usage
     return result
-
-
-def _load_config() -> dict:
-    with open("config.json", encoding="utf-8") as f:
-        return json.load(f)
 
 
 # ----------------------------------------------------------------------
