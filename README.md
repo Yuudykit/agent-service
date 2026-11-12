@@ -18,6 +18,11 @@
 
 ## 架构
 
+![智能客服 Agent 工程示意图](docs/images/architecture.png)
+
+<details>
+<summary>文本版架构</summary>
+
 ```
 用户输入
    │
@@ -38,6 +43,8 @@ core/agent_loop.py ──► core/reasoning.py（ReAct: Think→Act→Observe）
 
 core/agent_loop.py 输出最终回答
 ```
+
+</details>
 
 ## 快速开始
 
